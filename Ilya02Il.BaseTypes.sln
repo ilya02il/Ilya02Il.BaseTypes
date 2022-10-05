@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{29B73F15-6736-4220-BAE2-4FABAE9723FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CD48F4B1-3973-493C-8C7E-6C24FF551292}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ilya02Il.BaseTypes.Domain", "src\Ilya02Il.BaseTypes.Domain\Ilya02Il.BaseTypes.Domain.csproj", "{C4472FDE-39FB-47CF-B337-4D8ED2DF5EA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E5B50246-D289-4BBE-8E09-0E6202AA02D8}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4472FDE-39FB-47CF-B337-4D8ED2DF5EA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4472FDE-39FB-47CF-B337-4D8ED2DF5EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4472FDE-39FB-47CF-B337-4D8ED2DF5EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4472FDE-39FB-47CF-B337-4D8ED2DF5EA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C4472FDE-39FB-47CF-B337-4D8ED2DF5EA0} = {29B73F15-6736-4220-BAE2-4FABAE9723FF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B299B96-1ECC-4025-9047-84F9CD76DE02}
+	EndGlobalSection
+EndGlobal
