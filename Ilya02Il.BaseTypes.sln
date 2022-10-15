@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ilya02Il.BaseTypes.Domain.Tests", "tests\Ilya02Il.BaseTypes.Domain.Tests\Ilya02Il.BaseTypes.Domain.Tests.csproj", "{806650B5-1180-4974-8A9F-897EB20AE48F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ilya02Il.BaseTypes.Extensions", "src\Ilya02Il.BaseTypes.Extensions\Ilya02Il.BaseTypes.Extensions.csproj", "{2AFD88BC-3C9F-49E8-A126-95EB172F0CC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{806650B5-1180-4974-8A9F-897EB20AE48F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{806650B5-1180-4974-8A9F-897EB20AE48F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{806650B5-1180-4974-8A9F-897EB20AE48F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AFD88BC-3C9F-49E8-A126-95EB172F0CC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AFD88BC-3C9F-49E8-A126-95EB172F0CC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AFD88BC-3C9F-49E8-A126-95EB172F0CC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AFD88BC-3C9F-49E8-A126-95EB172F0CC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C4472FDE-39FB-47CF-B337-4D8ED2DF5EA0} = {29B73F15-6736-4220-BAE2-4FABAE9723FF}
 		{806650B5-1180-4974-8A9F-897EB20AE48F} = {CD48F4B1-3973-493C-8C7E-6C24FF551292}
+		{2AFD88BC-3C9F-49E8-A126-95EB172F0CC7} = {29B73F15-6736-4220-BAE2-4FABAE9723FF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B299B96-1ECC-4025-9047-84F9CD76DE02}
