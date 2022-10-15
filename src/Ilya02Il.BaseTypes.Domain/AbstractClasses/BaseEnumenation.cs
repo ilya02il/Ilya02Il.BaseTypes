@@ -6,7 +6,7 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
     ///     Базовый класс перечисления "Java like".
     /// </summary>
     /// <example>
-    ///     Пример реализации перечисления, наследуемого от <see cref="BaseEnumenation"/>:
+    ///     Пример реализации перечисления, наследуемого от <see cref="BaseEnumenation{TValue}"/>:
     ///     <code>
     ///         public class Color : BaseEnumenation
     ///         {
@@ -16,7 +16,7 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
     ///         }
     ///     </code>
     /// </example>
-    public abstract class BaseEnumenation : IComparable
+    public abstract class BaseEnumenation<TValue> : IComparable
     {
         /// <summary>
         /// Идентификатор элемента перечисления
@@ -26,15 +26,15 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
         /// <summary>
         /// Значение элемента перечисления
         /// </summary>
-        public string Value { get; protected set; }
+        public TValue Value { get; protected set; }
 
         /// <param name="id">
         ///     <see cref="Id"/>
         /// </param>
-        /// <param name="name">
+        /// <param name="value">
         ///     <see cref="Value"/>
         /// </param>
-        protected BaseEnumenation(int id, string name) => (Id, Value) = (id, name);
+        protected BaseEnumenation(int id, TValue value) => (Id, Value) = (id, value);
 
         /// <summary>
         ///     Показывает равен ли объект, на котором вызывается метод аргументу <paramref name="obj"/>.
@@ -44,14 +44,14 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
         /// </returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is BaseEnumenation other))
+            if (!(obj is BaseEnumenation<TValue> other))
                 return false;
 
             return Id.Equals(other.Id);
         }
 
         /// <summary>
-        ///     Оператор равенства, показывает равны ли два объекта типа <see cref="BaseEnumenation"/>.
+        ///     Оператор равенства, показывает равны ли два объекта типа <see cref="BaseEnumenation{TValue}"/>.
         /// </summary>
         /// <returns>
         ///     <see langword="true"/> если выполнено одно из условий:
@@ -74,7 +74,7 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
         ///         </item>
         ///     </list>
         /// </returns>
-        public static bool operator ==(BaseEnumenation left, BaseEnumenation right)
+        public static bool operator ==(BaseEnumenation<TValue> left, BaseEnumenation<TValue> right)
         {
             if (left is null && right is null)
                 return true;
@@ -86,19 +86,28 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
         }
 
         /// <summary>
-        /// Оператор неравенства. Возвращает значение противоположное тому, которое вернул бы оператор <seealso cref="operator ==(BaseEnumenation, BaseEnumenation)"/>
+        /// Оператор неравенства. Возвращает значение противоположное тому, которое вернул бы оператор <seealso cref="operator ==(BaseEnumenation{TValue}, BaseEnumenation{TValue})"/>
         /// </summary>
-        public static bool operator !=(BaseEnumenation left, BaseEnumenation right) => !left.Equals(right);
+        public static bool operator !=(BaseEnumenation<TValue> left, BaseEnumenation<TValue> right) => !(left == right);
+
+        /// <summary>
+        /// Оператор неявного приведения <see cref="BaseEnumenation{TValue}"/> к типу <see cref="int"/>.
+        /// </summary>
+        /// <param name="enumenation"></param>
+        public static implicit operator int(BaseEnumenation<TValue> enumenation) => enumenation.Id;
 
         /// <inheritdoc cref="IComparable.CompareTo(object?)"/>
         public int CompareTo(object obj)
         {
-            var other = (BaseEnumenation)obj;
+            var other = (BaseEnumenation<TValue>)obj;
 
             return Id.CompareTo(other.Id);
         }
 
-        /// <inheritdoc cref="object.GetHashCode"/>
-        public override int GetHashCode() => (Id.ToString() + Value).GetHashCode();
+        /// <returns>
+        /// Результат работы метода <see cref="GetHashCode()"/> для операции XOR хэшкода типа, <see cref="Id"/> и хэшкода <see cref="Value"/>.
+        /// </returns>
+        public override int GetHashCode() => 
+            (GetType().GetHashCode() ^ Id ^ Value.GetHashCode()).GetHashCode();
     }
 }

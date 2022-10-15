@@ -80,6 +80,12 @@ namespace Ilya02Il.BaseTypes.Domain.ValueTypes
         /// Приводит <paramref name="value"/> к типу <see cref="Result{T}"/>
         /// </summary>
         public static implicit operator Result<T>(T value) => new Result<T>(value);
+
+        /// <summary>
+        /// Приводит <paramref name="exception"/> к типу <see cref="Result{T}"/>
+        /// </summary>
+        public static implicit operator Result<T>(Exception exception) => new Result<T>(exception);
+
         /// <summary>
         ///     Сравнивает объекты <paramref name="left"/> и <paramref name="right"/>.
         /// </summary>
@@ -93,7 +99,16 @@ namespace Ilya02Il.BaseTypes.Domain.ValueTypes
         /// </returns>
         public static bool operator !=(Result<T> left, Result<T> right) => !left.Equals(right);
 
-        /// <inheritdoc cref="object.Equals(object)"/>
+        /// <summary>
+        ///     Показывает равен ли объект, на котором вызывается метод аргументу <paramref name="obj"/>.
+        /// </summary>
+        /// <param name="obj">
+        ///     Объект, сравниваемый с объектом <see cref="Result{T}"/>, у которого вызывается данный метод.
+        /// </param>
+        /// <returns>
+        ///     Результат работы метода <see cref="Equals(Result{T})"/> если <see langword="true"/>.<br/>
+        ///     <see langword="true"/> если: объекты имеют одинаковый тип и <paramref name="obj"/> не равен <see langword="null"/>.
+        /// </returns>
         public override bool Equals(object obj)
         {
             if (obj is null)
@@ -102,14 +117,12 @@ namespace Ilya02Il.BaseTypes.Domain.ValueTypes
             if (!(obj is Result<T> other))
                 return false;
 
-            if (!Equals(other))
-                return false;
-
-            return true;
+            return Equals(other);
         }
 
         /// <inheritdoc cref="object.GetHashCode()"/>
-        public override int GetHashCode() => _value.GetHashCode() ^ _exception.GetHashCode();
+        public override int GetHashCode() => 
+            _exception == null ? _value.GetHashCode() : _exception.GetHashCode();
 
         /// <summary>
         ///     Метод, преобразующий результат в объект типа <typeparamref name="TOut"/> при помощи функции <paramref name="ifSuccess"/>
@@ -152,10 +165,18 @@ namespace Ilya02Il.BaseTypes.Domain.ValueTypes
         public Result<TOut> Map<TOut>(Func<T, TOut> map) =>
             IsSuccess ? new Result<TOut>(map(_value)) : new Result<TOut>(_exception);
 
+        /// <summary>
+        ///     Показывает равен ли объект, на котором вызывается метод аргументу <paramref name="other"/>.
+        /// </summary>
+        /// <param name="other">
+        ///     Объект типа <see cref="Result{T}"/>, с которым сравнивается текущий объект
+        /// </param>
+        /// <returns>
+        ///     <see langword="true"/> если значения <see cref="Value"/> равны, а также значения <see cref="Exception"/> равны.
+        /// </returns>
         private bool Equals(Result<T> other) =>
             _value.Equals(other._value) &&
-            _exception == other._exception &&
-            _state == other._state;
+            _exception == other._exception;
 
         bool IEquatable<Result<T>>.Equals(Result<T> other) => Equals(other);
     }
