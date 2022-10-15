@@ -13,12 +13,17 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
         /// <summary>
         /// Данное свойство идентифицирует сущность. Сущности, у которых данное свойство равно, считаются равными даже если остальные поля имеют разные значения.
         /// </summary>
-        public virtual TId Id { get; protected set; }
+        public virtual TId Id { get; protected set; } = default;
+
+        /// <summary>
+        /// Базовый конструктор
+        /// </summary>
+        public BaseEntity() { }
 
         /// <param name="id">
         /// Идентификатор сущности.
         /// </param>
-        public BaseEntity(TId id = default) => Id = id;
+        public BaseEntity(TId id) => Id = id;
 
         /// <summary>
         ///     Показывает равен ли объект, на котором вызывается метод аргументу <paramref name="obj"/>.
@@ -43,16 +48,24 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
         ///             <description>объекты имеют разные типы;</description>
         ///         </item>
         ///         <item>
+        ///             <description><paramref name="obj"/> не является объектом, унаследованным от типа <see cref="BaseEntity{TId}"/>;</description>
+        ///         </item>
+        ///         <item>
         ///             <description>объекты имеют разные значения свойства <see cref="Id"/>;</description>
         ///         </item>
         ///         <item>
-        ///            <description>у одного из объектов свойство <see cref="Id"/> имеет значение <see cref="Guid.Empty"/>.</description>
+        ///            <description>у одного из объектов свойство <see cref="Id"/> имеет значение <see langword="default"/>.</description>
         ///         </item>
         ///     </list>
         /// </returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is BaseEntity<TId> other))
+            if (GetType() != obj.GetType())
+                return false;
+
+            var other = obj as BaseEntity<TId>;
+
+            if (other == null)
                 return false;
 
             if (ReferenceEquals(this, other))
@@ -86,10 +99,7 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
         /// <summary>
         /// Оператор неравенства. Возвращает значение противоположное тому, которое вернул бы оператор <seealso cref="operator ==(BaseEntity{TId}, BaseEntity{TId})"/>
         /// </summary>
-        public static bool operator !=(BaseEntity<TId> left, BaseEntity<TId> right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator !=(BaseEntity<TId> left, BaseEntity<TId> right) => !(left == right);
 
         /// <inheritdoc cref="object.GetHashCode()"/>
         public override int GetHashCode()

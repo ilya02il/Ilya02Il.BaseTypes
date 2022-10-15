@@ -20,6 +20,7 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 | Constructors | |
 | :--- | :--- |
+| [BaseEntity()](Ilya02Il.BaseTypes.Domain.AbstractClasses.BaseEntity_TId_.BaseEntity().md 'Ilya02Il.BaseTypes.Domain.AbstractClasses.BaseEntity<TId>.BaseEntity()') | Базовый конструктор |
 | [BaseEntity(TId)](Ilya02Il.BaseTypes.Domain.AbstractClasses.BaseEntity_TId_.BaseEntity(TId).md 'Ilya02Il.BaseTypes.Domain.AbstractClasses.BaseEntity<TId>.BaseEntity(TId)') | |
 
 | Properties | |

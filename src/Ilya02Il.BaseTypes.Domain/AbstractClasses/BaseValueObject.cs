@@ -69,7 +69,16 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
         ///     Объект, сравниваемый с объектом <see cref="BaseValueObject"/>, у которого вызывается данный метод.
         /// </param>
         /// <returns>
-        ///     <see langword="true"/> если перечисления, являющиеся результатом вызова функции <see cref="GetEqualityComponents"/> у обоих объектов, равны.
+        ///     <see langword="true"/> если:
+        ///     <list type="bullet">
+        ///         <item>
+        ///             <description>объекты имеют одинаковый тип и <paramref name="obj"/> не равен <see langword="null"/>;</description>
+        ///         </item>
+        ///         <item>
+        ///             <description>перечисления, являющиеся результатом вызова функции <see cref="GetEqualityComponents"/> у обоих объектов, равны.</description>
+        ///         </item>
+        ///     </list>    
+        ///     
         ///     <br/>
         ///     <see langword="false"/> если выполнено одно из условий:<br/>
         ///     <list type="bullet">
@@ -85,8 +94,10 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
         /// </returns>
         public override bool Equals(object obj)
         {
-            if (obj is null || !(obj is BaseValueObject other))
+            if (obj == null || obj.GetType() != GetType())
                 return false;
+
+            var other = (BaseValueObject)obj;
 
             return GetEqualityComponents()
                 .SequenceEqual(other.GetEqualityComponents());
@@ -96,8 +107,8 @@ namespace Ilya02Il.BaseTypes.Domain.AbstractClasses
         public override int GetHashCode()
         {
             return GetEqualityComponents()
-                .Select(x => !(x is null) ? x.GetHashCode() : 0)
-                .Aggregate((x, y) => x ^ y);
+                .Select(x => !(x == null) ? x.GetHashCode() : 0)
+                .Aggregate(GetType().GetHashCode(), (x, y) => x ^ y);
         }
     }
 }

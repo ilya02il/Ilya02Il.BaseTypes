@@ -4,7 +4,7 @@
 ## BaseEntity(TId) Constructor
 
 ```csharp
-public BaseEntity(TId id=default(TId));
+public BaseEntity(TId id);
 ```
 #### Parameters
 
