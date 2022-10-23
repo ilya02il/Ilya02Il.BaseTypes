@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  	<Exec Command="defaultdocumentation -a bin\Debug\netcoreapp3.1\Ilya02Il.BaseTypes.Extensions.dll -d bin\Debug\netcoreapp3.1\Ilya02Il.BaseTypes.Extensions.xml -o ./docs" />
+  </Target>
 
 </Project>
