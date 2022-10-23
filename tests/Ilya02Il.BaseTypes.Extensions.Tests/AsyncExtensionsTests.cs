@@ -148,7 +148,7 @@ namespace Ilya02Il.BaseTypes.Extensions.Tests
             var task = Task.Delay(10);
             int result = 0;
 
-            await task.Then()
+            await task.Then(() => { })
                 .Catch()
                 .Finally(() => result = 1);
 
@@ -161,7 +161,7 @@ namespace Ilya02Il.BaseTypes.Extensions.Tests
             var task = Task.FromResult(2);
             int result = 0;
 
-            await task.Then()
+            await task.Then(() => { })
                 .Catch()
                 .Finally(() => result = 1);
 

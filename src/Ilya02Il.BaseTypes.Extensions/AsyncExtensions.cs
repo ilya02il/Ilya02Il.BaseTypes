@@ -50,16 +50,12 @@ namespace Ilya02Il.BaseTypes.Extensions
         ///     как <paramref name="task"/> была отменена
         /// </param>
         public static async Task Then(this Task task,
-            Action onSuccess = default,
+            Action onSuccess,
             Action onCancelled = default)
         {
             try
             {
                 await task;
-
-                if (onSuccess == null)
-                    await Task.CompletedTask;
-
                 onSuccess();
             }
             catch (OperationCanceledException)
